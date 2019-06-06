@@ -19,7 +19,7 @@
 
 \ProvidesClass{yaac-another-awesome-cv}[2018/07/19  v1.9.2 'YAAC: Another Awesome CV' Class]
 
-\LoadClass[a4paper]{article}
+\LoadClass[letterpaper]{article}
 
 \newif\if@showLinks   \@showLinksfalse
 
@@ -73,6 +73,7 @@
 \RequirePackage{tikz}
 \RequirePackage[skins]{tcolorbox}
 \RequirePackage{fancyhdr}
+\RequirePackage{ragged2e}
 
 
 \DeclareUnicodeCharacter{00E9}{\'{e}}
@@ -185,7 +186,11 @@
 
 % Render author's name
 % Usage: \user{<firstanme>}{<lastname>}
-\newcommand\user[2]{\color{accentcolor}{\LARGE #1 \textsc{\textbf{#2}}}\color{Black}}
+\newcommand\user[2]{\color{accentcolor}{
+    \begin{center}
+    \LARGE \textsc{\textbf{#1}} \textsc{\textbf{#2}}
+    \end{center}}
+    \color{Black}}
 
 % Render a text with its symbol
 % Usage; \socialtext{<icon>}{<label>}
@@ -208,7 +213,12 @@
 
 % Define author's tagline
 % Usage: \tagline{<tag line>}
-\newcommand*{\tagline}[1]{\def\@tagline{#1}}
+\newcommand*{\tagline}[1]{
+\def\@tagline{
+\begin{center}
+#1
+\end{center}
+}}
 
 % Define author's photo
 % Usage \photo{<diameter>}{<photo>}
@@ -446,14 +456,13 @@
   \bigskip
 }
 
-\newcommand*\referee[5]{
+\newcommand*\referee[4]{
   \hspace{1em}
   \begin{minipage}[t]{\dimexpr(\linewidth/3) - 3em}
     \begin{tabular}{>{}l >{}l}
       \multicolumn{2}{l}{\textbf{#1}}\\
       \multicolumn{2}{l}{\emph{#2}, \textsc{#3}}\\
-      \quad \mailSymbol & \href{mailto:#4}{#4} \\  
-      \quad \faPhone & #5 \\
+      \quad \mailSymbol & \href{mailto:#4}{#4} \\ 
     \end{tabular}
   \end{minipage}%
 }
